@@ -44,5 +44,6 @@ const styles = {
   col: {
     background: '#F2F2F2',
     margin: 30,
+    height: '90%',
   },
 };
