@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
-import { Balloon, Icon } from '@icedesign/base';
+import { Balloon, Icon, Overlay, Grid, Dialog } from '@icedesign/base';
 import Menu from '@icedesign/menu';
 import Logo from '../Logo';
 import './Header.scss';
 
+const { Row, Col } = Grid;
+
 const MENUS = [
   {
     name: '主页',
-    path: '/ice/docs/ice-design',
+    path: 'https://www.proton.global/',
   },
   {
     name: '活动',
-    path: '/ice/docs',
+    path: '/',
   },
   {
     name: '玩法',
@@ -28,6 +30,19 @@ const MENUS = [
 ];
 
 export default class Header extends Component {
+  static displayName = 'Header';
+
+  static propTypes = {};
+
+  static defaultProps = {};
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      visibleLogin: false
+    };
+  }
+  
   renderBalloonContent = (menu, idx) => {
     return (
       <Menu.Item key={idx}>
@@ -71,7 +86,24 @@ export default class Header extends Component {
     });
   };
 
+  onOpen = () => {
+    this.setState({
+      visibleLogin: true
+    });
+  };
+
+  onClose = () => {
+    this.setState({
+      visibleLogin: false
+    });
+  };
+
   render() {
+    const footer = (
+      <a onClick={this.onClose} href="javascript:;">
+        Close
+      </a>
+    );
     return (
       <div className="header-container">
         <div className="header-content">
@@ -80,13 +112,31 @@ export default class Header extends Component {
             <Menu className="header-navbar-menu" mode="horizontal">
               {this.renderMenuItem()}
               <Menu.Item key={'login'}>
-                <a href=''>登录</a>
+                <a onClick={this.onOpen}>登录</a>
               </Menu.Item>
               <Menu.Item key={'register'}>
-                <a href=''>注册</a>
+                <a onClick={this.onOpen}>注册</a>
               </Menu.Item>
             </Menu>
           </div>
+          <Dialog
+            visible={this.state.visibleLogin}
+            footer={footer}
+            onClose={this.onClose}
+          >
+            <div style={{background: "#FFFFFF"}}>
+              <Row>
+                <Col>
+                  <img src="/public/images/logo.png" alt="logo"/>
+                </Col>
+              </Row>
+            </div>
+            <h3>Your one-stop communication tool!</h3>
+            <ul>
+              <li>View messages from buyers & suppliers</li>
+              <li>Negotiate the details of your order</li>
+            </ul>
+          </Dialog>
         </div>
       </div>
     );
