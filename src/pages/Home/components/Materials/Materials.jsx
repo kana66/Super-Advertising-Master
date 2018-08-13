@@ -35,7 +35,7 @@ const styles = {
   wrapper: {
     position: 'relative',
     overflow: 'hidden',
-    height: '500px',
+    // height: '500px',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',

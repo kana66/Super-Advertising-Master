@@ -46,12 +46,12 @@ export default class Person extends Component {
         {tabs.map(function(item) {
           if (item.key == 'join') {
             return <TabPane key={item.key} tab={item.tab}>
-              <Row>
+              <Row wrap>
                 <Col>
                   锁定1000PTT，预计收益1ETH
                 </Col>
               </Row>
-              <Row>
+              <Row wrap>
                 <Col>
                   打入并锁定PTT1个月，产生可租借额度<br />
                   {_this.state.copyAddress}
@@ -65,7 +65,7 @@ export default class Person extends Component {
                   </Balloon>
                 </Col>
               </Row>
-              <Row>
+              <Row wrap>
                 <Col>
                   800/1000 PTT-Silver
                 </Col>
