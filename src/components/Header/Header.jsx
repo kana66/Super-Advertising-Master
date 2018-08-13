@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
-import { Balloon, Icon, Overlay, Grid, Dialog } from '@icedesign/base';
+import { Balloon, Icon, Input, Grid, Dialog, Button } from '@icedesign/base';
+import IceIcon from '@icedesign/icon';
 import Menu from '@icedesign/menu';
 import Logo from '../Logo';
+import {
+  FormBinderWrapper as IceFormBinderWrapper,
+  FormBinder as IceFormBinder,
+  FormError as IceFormError,
+} from '@icedesign/form-binder';
 import './Header.scss';
 
 const { Row, Col } = Grid;
@@ -98,11 +104,24 @@ export default class Header extends Component {
     });
   };
 
+  onClick() {
+    axios.post(Config.apiHost + '/users/captcha', { phone: this.state.value.phone, country: this.state.value.country })
+    .then(function (response) {
+      if (response && response.status == 200 && response.data.status == 200) {
+        Feedback.toast.success(response.data.msg);
+      } else {
+        Feedback.toast.error(response.data.msg);
+      }
+    })
+    .catch(function (error) {
+      console.log(error)
+      Feedback.toast.error('服务器错误');
+    })
+  }
+
   render() {
     const footer = (
-      <a onClick={this.onClose} href="javascript:;">
-        Close
-      </a>
+      <a />
     );
     return (
       <div className="header-container">
@@ -123,22 +142,118 @@ export default class Header extends Component {
             visible={this.state.visibleLogin}
             footer={footer}
             onClose={this.onClose}
+            style={styles.dialog}
           >
-            <div style={{background: "#FFFFFF"}}>
-              <Row>
-                <Col>
-                  <img src="/public/images/logo.png" alt="logo"/>
-                </Col>
-              </Row>
+            <div style={{ background: "#FFFFFF", justifyContent: "center", textAlign: "center" }}>
+              <img src="/public/images/logo.png" alt="logo" style={styles.img}/>
+              <IceFormBinderWrapper
+                value={this.state.value}
+                onChange={this.formChange}
+                ref="form"
+              >
+                <div style={styles.formItems}>
+                  <Row style={styles.formItem}>
+                    <Col style={styles.formItemCol}>
+                      <IceIcon type="phone" size="small" style={styles.inputIcon} />
+                      <IceFormBinder
+                        name="phone"
+                        required
+                        message="请输入正确的手机号"
+                      >
+                        <Input size="large" maxLength={11} placeholder="请输入手机号码" style={styles.input} />
+                      </IceFormBinder>
+                    </Col>
+                    <Col>
+                      <IceFormError name="phone" />
+                    </Col>
+                  </Row>
+
+                  <Row style={styles.formItem}>
+                    <Button style={styles.captchaButton} onClick={this.onClick}>获取验证码</Button>
+                  </Row>
+
+                  <Row style={styles.formItem}>
+                    <Col style={styles.formItemCol}>
+                      <IceIcon type="lock" size="small" style={styles.inputIcon} />
+                      <IceFormBinder
+                        name="captcha"
+                        required
+                        message="请输入收到的验证码"
+                      >
+                        <Input size="large" maxLength={11} placeholder="请输入验证码" style={styles.input} />
+                      </IceFormBinder>
+                    </Col>
+                    <Col>
+                      <IceFormError name="captcha" />
+                    </Col>
+                  </Row>
+
+                  <Row style={styles.formItem}>
+                    <Button
+                      type="primary"
+                      onClick={this.handleSubmit}
+                      style={styles.submitBtn}
+                    >
+                      登录 / 注册
+                    </Button>
+                  </Row>
+                </div>
+              </IceFormBinderWrapper>
             </div>
-            <h3>Your one-stop communication tool!</h3>
-            <ul>
-              <li>View messages from buyers & suppliers</li>
-              <li>Negotiate the details of your order</li>
-            </ul>
           </Dialog>
         </div>
       </div>
     );
   }
 }
+
+const styles = {
+  formItem: {
+    position: 'relative',
+    marginBottom: '20px',
+    flexDirection: 'column',
+    padding: '0',
+  },
+  formItemCol: {
+    position: 'relative',
+    padding: '0',
+  },
+  inputIcon: {
+    position: 'absolute',
+    left: '35px',
+    top: '50%',
+    transform: 'translateY(-50%)',
+    color: '#999',
+  },
+  submitBtn: {
+    fontSize: '14px',
+    height: '30px',
+    lineHeight: '30px',
+    background: '#3080fe',
+    borderRadius: '4px',
+    width: '200px',
+    margin: '0 auto',
+  },
+  captchaButton: {
+    fontSize: '14px',
+    height: '30px',
+    lineHeight: '30px',
+    background: '#FFFFFF',
+    borderRadius: '4px',
+    width: '200px',
+    margin: '0 auto',
+  },
+  input: {
+    paddingLeft: '32px',
+  },
+  dialog: {
+    height: 500,
+    width: 300,
+    padding: 10,
+  },
+  img: {
+    height: 128,
+    width: 128,
+    margin: '25px',
+  },
+};
