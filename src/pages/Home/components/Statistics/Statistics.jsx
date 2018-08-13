@@ -42,7 +42,7 @@ const styles = {
     background: '#FFFFFF',
   },
   col: {
-    background: '#F2F2F2',
+    // background: '#F2F2F2',
     margin: 30,
     height: '90%',
   },
