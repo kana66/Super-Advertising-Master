@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Tab, Grid, Feedback, Balloon } from '@icedesign/base';
+import { Tab, Grid, Feedback, Balloon, Button } from '@icedesign/base';
 import FoundationSymbol from 'foundation-symbol';
 import copy from 'copy-to-clipboard';
 
@@ -20,6 +20,8 @@ export default class Person extends Component {
 
   constructor(props) {
     super(props);
+    let pageWidth = document.body.clientWidth
+    console.log(pageWidth)
     this.state = {
       copyAddress: '0xb40EdcF24BDd7379a95739655f97564d36299616'
     };
@@ -47,6 +49,40 @@ export default class Person extends Component {
           if (item.key == 'join') {
             return <TabPane key={item.key} tab={item.tab}>
               <Row wrap>
+                <Col style={styles.col}>
+                  目前预计可获得收益 ： <span style={styles.span}>0 CNY</span>
+                </Col>
+              </Row>
+              <Row wrap>
+                <Col style={styles.col}>
+                  我的排名 ： <span style={styles.span}>-</span>
+                </Col>
+              </Row>
+              <Row wrap>
+                <Col style={styles.col}>
+                  距离下一收益级还需 ： <span style={styles.span}>0 PTT</span>
+                </Col>
+              </Row>
+              <Row wrap>
+                <Col style={styles.col}>
+                  已出租额度 ： <span style={styles.span}>0 PTT</span>
+                </Col>
+              </Row>
+              <Row wrap>
+                <Col style={styles.col}>
+                  我的积分 ： <span style={styles.span}>0 PTT</span><br />
+                  <span style={styles.creditDescSpan}>积分计算公式 ： 总出租额度 × 总出租时间</span>
+                </Col>
+              </Row>
+              <Row wrap>
+                <Col align={"center"} style={{ textAlign: "center" }}>
+                  <Button size={"large"} type={"primary"} style={styles.addButton}>增加出租额度</Button>
+                </Col>
+              </Row>
+            </TabPane>
+          } else {
+            return <TabPane key={item.key} tab={item.tab}>
+              <Row wrap>
                 <Col>
                   锁定1000PTT，预计收益1ETH
                 </Col>
@@ -71,10 +107,6 @@ export default class Person extends Component {
                 </Col>
               </Row>
             </TabPane>
-          } else {
-            return <TabPane key={item.key} tab={item.tab}>
-              {item.content}
-            </TabPane>
           }
         })}
       </Tab>
@@ -82,3 +114,25 @@ export default class Person extends Component {
   }
 }
 
+const styles = {
+  col: {
+    fontSize: "16px",
+    margin: "25px 25px 25px 10px",
+  },
+  addButton: {
+    borderRadius: 0,
+    margin: "26px",
+    fontSize: "20px",
+    padding: "10px 30px",
+    height: 52,
+  },
+  span: {
+    fontSize: "18px",
+    color: "#3080FE",
+    fontWeight: "bold",
+  },
+  creditDescSpan: {
+    fontSize: "12px",
+    color: "#A39F9E",
+  },
+}

@@ -15,9 +15,9 @@ const dataSource = [
   { ranking: "5", name: "二", score: "700", type: "团队", change: "down" },
   { ranking: "6", name: "小毛", score: "1380", type: "团队", change: "up" },
   { ranking: "7", name: "推客战队", score: "1200", type: "团队", change: "no_change" },
-  // { ranking: "8", name: "球公司", score: "1140", type: "个人", change: "down" },
-  // { ranking: "9", name: "三", score: "900", type: "个人", change: "up" },
-  // { ranking: "10", name: "四", score: "700", type: "团队", change: "down" },
+  { ranking: "8", name: "球公司", score: "1140", type: "个人", change: "down" },
+  { ranking: "9", name: "三", score: "900", type: "个人", change: "up" },
+  { ranking: "10", name: "四", score: "700", type: "团队", change: "down" },
 ];
 const myDataSource = [
   { ranking: "3", name: "王小毛", score: "1380", type: "团队", change: "up" },
