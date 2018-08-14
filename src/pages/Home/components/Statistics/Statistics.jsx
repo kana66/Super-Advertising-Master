@@ -20,10 +20,10 @@ export default class Statistics extends Component {
   render() {
     return (
       <Row wrap style={styles.wrapper}>
-        <Col xs='22' s='10' style={styles.col}>
+        <Col xxs='22' xs='22' s='10' style={styles.col}>
           <RankingList />
         </Col>
-        <Col xs='22' s='10' style={styles.col}>
+        <Col xxs='22' xs='22' s='10' style={styles.col}>
           <Statistic />
         </Col>
       </Row>
@@ -44,6 +44,6 @@ const styles = {
   col: {
     // background: '#F2F2F2',
     margin: 30,
-    height: '90%',
+    // height: 400,
   },
 };
