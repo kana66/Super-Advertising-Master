@@ -9,11 +9,6 @@ const dataSource = [
   { ranking: "3", name: "星球公司", score: "1140", type: "个人", change: "down" },
   { ranking: "4", name: "一", score: "900", type: "个人", change: "up" },
   { ranking: "5", name: "二", score: "700", type: "团队", change: "down" },
-  { ranking: "6", name: "小毛", score: "1380", type: "团队", change: "up" },
-  { ranking: "7", name: "推客战队", score: "1200", type: "团队", change: "no_change" },
-  // { ranking: "8", name: "球公司", score: "1140", type: "个人", change: "down" },
-  // { ranking: "9", name: "三", score: "900", type: "个人", change: "up" },
-  // { ranking: "10", name: "四", score: "700", type: "团队", change: "down" },
 ];
 
 export default class RankingList extends Component {
@@ -41,8 +36,26 @@ export default class RankingList extends Component {
   }
 
   nameRender(value, index, record) {
-    let column = record.ranking + '.' + record.name
-    return column;
+    let fontColor = "#666666"
+    let fontSize = "14px"
+    if (record.ranking == 1) {
+      fontColor = "#FEE554"
+      fontSize = "20px"
+    } else if (record.ranking == 2) {
+      fontColor = "#BCBCBC"
+      fontSize = "20px"
+    } else if (record.ranking == 3) {
+      fontColor = "#DA9746"
+      fontSize = "20px"
+    }
+    return (
+      <div>
+        <span style={{ color: fontColor, fontSize: fontSize }}>
+          { record.ranking + '. ' }
+        </span>
+        { record.name }
+      </div>
+    )
   }
 
   render() {
