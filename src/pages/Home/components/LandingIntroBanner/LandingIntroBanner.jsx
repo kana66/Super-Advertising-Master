@@ -36,27 +36,39 @@ export default class LandingIntroBanner extends Component {
             <p style={styles.subTitle}>
               Proton联合XXX首次区块链投放测试
             </p>
-            <h2 style={styles.title}>参加一同瓜分100ETH&1,000,000PTT现金</h2>
-            <p style={styles.subTitle}>
-              12:34:56
-            </p>
+            <h2 style={styles.title}>
+              参加一同瓜分 <span style={styles.moneySpan}>100 ETH</span> & <span style={styles.moneySpan}>1,000,000 PTT</span> 现金
+            </h2>
             <div
               className="landing-intro-banner-buttons"
-              style={{ textAlign: 'center', marginTop: 30 }}
+              style={{ 
+                textAlign: 'center', 
+                marginTop: 30 
+              }}
             >
-              <Button
-                style={{
-                  height: 50,
-                  padding: '0 58px',
-                  fontSize: 16,
-                  marginBottom: '20px',
-                  color: '#3080FE',
+              {/* <span 
+                style={{ 
+                  border: "2px solid white",
+                  padding: "3px",
+                  lineHeight: 60,
                 }}
-                size="large"
-                type="normal"
-              >
-                参加
-              </Button>
+              > */}
+                <Button
+                  style={{
+                    height: 50,
+                    padding: '0 58px',
+                    fontSize: 20,
+                    marginBottom: '20px',
+                    color: '#666666',
+                    borderRadius: 0,
+                    fontWeight: "bold",
+                  }}
+                  size="large"
+                  type="normal"
+                >
+                  参加
+                </Button>
+              {/* </span> */}
             </div>
           </div>
         </div>
@@ -68,19 +80,19 @@ export default class LandingIntroBanner extends Component {
 const styles = {
   title: {
     textAlign: 'center',
-    fontSize: '20px',
+    fontSize: '24px',
     letterSpacing: '4px',
     lineHeight: '60px',
     color: '#fff',
-    marginBottom: '30px',
+    margin: 30,
   },
   subTitle: {
     fontSize: '20px',
     margin: '0px',
     color: '#fff',
-    textShadow: '#C8C8C8 1px 1px 2px',
+    // textShadow: '#C8C8C8 1px 1px 2px',
     textAlign: 'center',
-    lineHeight: '1.7em',
+    lineHeight: '34px',
   },
   leftButton: {
     marginRight: '20px',
@@ -101,4 +113,7 @@ const styles = {
   updateLogLink: {
     color: '#fff',
   },
+  moneySpan: {
+    fontSize: '30px',
+  }
 };
