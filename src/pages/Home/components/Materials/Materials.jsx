@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Grid, Feedback } from '@icedesign/base';
+import { Grid } from '@icedesign/base';
 import Person from './components/Person';
 import RankingList from './components/RankingList';
 
@@ -35,11 +35,11 @@ const styles = {
   wrapper: {
     position: 'relative',
     overflow: 'hidden',
-    // height: '500px',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
     background: '#FFFFFF',
+    paddingTop: "75px",
   },
   col: {
     background: '#F2F2F2',
