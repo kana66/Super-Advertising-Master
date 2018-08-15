@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Tab, Grid, Feedback, Balloon, Button, Dialog } from '@icedesign/base';
+import { Tab, Grid, Feedback, Balloon, Button, Dialog, Table, Pagination } from '@icedesign/base';
 import FoundationSymbol from 'foundation-symbol';
 import copy from 'copy-to-clipboard';
 
@@ -10,6 +10,13 @@ const tabs = [
   { tab: "账户", key: "account", content: "这里是账户内容" },
 ];
 const addressQrcode = '/public/images/address_qrcode.png';
+const dataSource = [
+  { action: "打入", target: "帮推客战队", coins: "1380", created_at: "2018-08-15 19:00:00" },
+  { action: "打入", target: "星球公司", coins: "1280", created_at: "2018-08-15 18:00:00" },
+  { action: "打入", target: "自己", coins: "1180", created_at: "2018-08-15 17:00:00" },
+  { action: "打入", target: "自己", coins: "980", created_at: "2018-08-15 16:00:00" },
+  { action: "打入", target: "星球公司", coins: "880", created_at: "2018-08-15 15:00:00" },
+];
 
 export default class Person extends Component {
   static displayName = 'Person';
@@ -149,6 +156,17 @@ export default class Person extends Component {
               <Row wrap>
                 <Col style={styles.col}>
                   PTT-Silver ： <span style={styles.span}>100</span>/1000
+                </Col>
+              </Row>
+              <Row wrap>
+                <Col>
+                  <Table dataSource={dataSource} hasBorder={false}>
+                    <Table.Column title="动作" dataIndex="action" />
+                    <Table.Column title="目标" dataIndex="target" />
+                    <Table.Column title="数量" dataIndex="coins" />
+                    <Table.Column title="时间" dataIndex="created_at" />
+                  </Table>
+                  <Pagination style={{ textAlign: 'center' }} shape="no-border" type="simple" onChange={_this.handlePageChange} />
                 </Col>
               </Row>
             </TabPane>
