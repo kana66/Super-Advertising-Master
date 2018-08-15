@@ -13,6 +13,19 @@ export default class Home extends Component {
     this.state = {};
   }
 
+  // onWindowResize() {
+  //   let pageWidth = document.body.clientWidth
+  //   console.log(pageWidth)
+  // }
+
+  // componentDidMount() {
+  //   window.addEventListener('resize', this.onWindowResize)
+  // }
+
+  // componentWillUnmount() {
+  //   window.removeEventListener('resize', this.onWindowResize)
+  // }
+
   render() {
     return (
       <div className="home-page" style={{ background: '#3E3A39' }}>

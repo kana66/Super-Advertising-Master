@@ -20,8 +20,6 @@ export default class Person extends Component {
 
   constructor(props) {
     super(props);
-    let pageWidth = document.body.clientWidth
-    console.log(pageWidth)
     this.state = {
       copyAddress: '0xb40EdcF24BDd7379a95739655f97564d36299616'
     };
