@@ -30,6 +30,7 @@ export default class Person extends Component {
     this.state = {
       copyAddress: '0xb40EdcF24BDd7379a95739655f97564d36299616',
       visibleIncreaseAmount: false,
+      isPay: true,
     };
   }
   
@@ -37,8 +38,16 @@ export default class Person extends Component {
     console.log("change", key);
   }
   
-  handleClick(key) {
-    console.log("click", key);
+  handleClick() {
+    if (this.state.isPay) {
+      this.setState({
+        isPay: false,
+      })
+    } else {
+      this.setState({
+        isPay: true,
+      })
+    }
   }
 
   copyAddress() {
@@ -87,24 +96,15 @@ export default class Person extends Component {
               <Row wrap>
                 <Col style={styles.col}>
                   已出租额度 ： <span style={styles.span}>0 PTT</span>
-                </Col>
-              </Row>
-              <Row wrap>
-                <Col style={styles.col}>
-                  我的积分 ： <span style={styles.span}>0 PTT</span><br />
-                  <span style={styles.creditDescSpan}>积分计算公式 ： 总出租额度 × 总出租时间</span>
-                </Col>
-              </Row>
-              <Row wrap>
-                <Col align={"center"} style={{ textAlign: "center" }}>
                   <Button 
                     size={"large"} 
                     type={"primary"} 
-                    style={styles.increaseButton} 
+                    style={styles.smallIncreaseButton} 
                     onClick={_this.onIncreaseAmountOpen.bind(_this)}
                   >
                     增加出租额度
-                    <Dialog
+                  </Button>
+                  <Dialog
                       visible={_this.state.visibleIncreaseAmount}
                       footer={footer}
                       onClose={_this.onIncreaseAmountClose}
@@ -129,9 +129,41 @@ export default class Person extends Component {
                         </Col>
                       </Row>
                     </Dialog>
-                  </Button>
                 </Col>
               </Row>
+              <Row wrap>
+                <Col style={styles.col}>
+                  我的积分 ： <span style={styles.span}>0 PTT</span><span onClick={_this.handleClick.bind(_this)}>切换</span><br />
+                  <span style={styles.creditDescSpan}>积分计算公式 ： 总出租额度 × 总出租时间</span>
+                  <span style={styles.creditDescSpan}>切换</span>
+                </Col>
+              </Row>
+              {
+                _this.state.isPay ? <Row wrap>
+                  <Col align={"center"} style={{ textAlign: "center" }}>
+                    <Button 
+                      size={"large"} 
+                      type={"primary"} 
+                      style={styles.increaseButton} 
+                      onClick={_this.onIncreaseAmountOpen.bind(_this)}
+                    >
+                      组团
+                    </Button>
+                  </Col>
+                </Row> :  <Row wrap>
+                  <Col align={"center"} style={{ textAlign: "center" }}>
+                    <Button 
+                      size={"large"} 
+                      type={"primary"} 
+                      style={styles.increaseButton} 
+                      onClick={_this.onIncreaseAmountOpen.bind(_this)}
+                    >
+                      增加出租额度
+                    </Button>
+                  </Col>
+                </Row> 
+              }
+              
             </TabPane>
           } else {
             return <TabPane key={item.key} tab={item.tab}>
@@ -190,6 +222,13 @@ const styles = {
     fontSize: "20px",
     padding: "10px 30px",
     height: 52,
+  },
+  smallIncreaseButton: {
+    borderRadius: 0,
+    // margin: "26px",
+    fontSize: "16px",
+    // padding: "10px 30px",
+    // height: 52,
   },
   span: {
     fontSize: "18px",
