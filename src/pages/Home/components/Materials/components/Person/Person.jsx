@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
-import { Tab, Grid, Feedback, Balloon, Button, Dialog, Table, Pagination } from '@icedesign/base';
+import { Tab, Grid, Feedback, Balloon, Button, Dialog, Table, Pagination, Input } from '@icedesign/base';
 import FoundationSymbol from 'foundation-symbol';
 import copy from 'copy-to-clipboard';
+import {
+  FormBinderWrapper as IceFormBinderWrapper,
+  FormBinder as IceFormBinder,
+  FormError as IceFormError,
+} from '@icedesign/form-binder';
+import IceIcon from '@icedesign/icon';
 
 const { Row, Col } = Grid;
 const TabPane = Tab.TabPane;
@@ -219,11 +225,55 @@ export default class Person extends Component {
                       onClose={_this.onCreateTeamClose}
                       style={styles.increaseAmount}
                     >
-                      <Row>
-                        <Col style={{ fontSize: "16px", margin: "25px 25px 25px 10px" }}>
-                          创建
-                        </Col>
-                      </Row>
+                      <IceFormBinderWrapper
+                        value={_this.state.value}
+                        onChange={_this.formChange}
+                        ref="form"
+                      >
+                        <div style={styles.formItems}>
+                          <Row style={styles.formItem}>
+                            <Col style={styles.formItemCol}>
+                              <IceIcon type="phone" size="small" style={styles.inputIcon} />
+                              <IceFormBinder
+                                name="phone"
+                                required
+                                message="请输入正确的手机号"
+                              >
+                                <Input size="large" maxLength={11} placeholder="请输入手机号码" style={styles.input} />
+                              </IceFormBinder>
+                            </Col>
+                            <Col>
+                              <IceFormError name="phone" />
+                            </Col>
+                          </Row>
+
+                          <Row style={styles.formItem}>
+                            <Col style={styles.formItemCol}>
+                              <IceIcon type="lock" size="small" style={styles.inputIcon} />
+                              <IceFormBinder
+                                name="captcha"
+                                required
+                                message="请输入收到的验证码"
+                              >
+                                <Input size="large" maxLength={11} placeholder="请输入验证码" style={styles.input} />
+                              </IceFormBinder>
+                            </Col>
+                            <Col>
+                              <IceFormError name="captcha" />
+                            </Col>
+                          </Row>
+
+                          <Row style={styles.formItem}>
+                            <Button
+                              type="primary"
+                              onClick={_this.handleSubmit}
+                              style={styles.submitBtn}
+                            >
+                              登录 / 注册
+                            </Button>
+                          </Row>
+                        </div>
+                      </IceFormBinderWrapper>
                     </Dialog>
                   </Col>
                   <Col align={"center"} style={{ textAlign: "center" }}>
@@ -242,7 +292,7 @@ export default class Person extends Component {
                         <Col style={{ fontSize: "16px", margin: "25px 25px 25px 10px" }}>
                           加入
                         </Col>
-                      </Row>
+                      </Row>7
                     </Dialog>
                   </Col>
                 </Row> :  <Row wrap>
@@ -343,5 +393,34 @@ const styles = {
     height: 80,
     width: 80,
     cursor: "pointer",
+  },
+  formItem: {
+    position: 'relative',
+    marginBottom: '20px',
+    flexDirection: 'column',
+    padding: '0',
+  },
+  formItemCol: {
+    position: 'relative',
+    padding: '0',
+  },
+  inputIcon: {
+    position: 'absolute',
+    left: '35px',
+    top: '50%',
+    transform: 'translateY(-50%)',
+    color: '#999',
+  },
+  submitBtn: {
+    fontSize: '14px',
+    height: '30px',
+    lineHeight: '30px',
+    background: '#3080fe',
+    borderRadius: '4px',
+    width: '200px',
+    margin: '0 auto',
+  },
+  input: {
+    paddingLeft: '32px',
   },
 }
