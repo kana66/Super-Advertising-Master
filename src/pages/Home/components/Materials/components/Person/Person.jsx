@@ -33,6 +33,8 @@ export default class Person extends Component {
     this.state = {
       copyAddress: '0xb40EdcF24BDd7379a95739655f97564d36299616',
       visibleIncreaseAmount: false,
+      visibleCreateTeam: false,
+      visibleJoinTeam: false,
       isPay: true,
     };
   }
@@ -68,6 +70,30 @@ export default class Person extends Component {
   onIncreaseAmountClose = () => {
     this.setState({
       visibleIncreaseAmount: false
+    });
+  };
+
+  onCreateTeamOpen = () => {
+    this.setState({
+      visibleCreateTeam: true
+    });
+  };
+
+  onCreateTeamClose = () => {
+    this.setState({
+      visibleCreateTeam: false
+    });
+  };
+
+  onJoinTeamOpen = () => {
+    this.setState({
+      visibleJoinTeam: true
+    });
+  };
+
+  onJoinTeamClose = () => {
+    this.setState({
+      visibleJoinTeam: false
     });
   };
 
@@ -150,15 +176,55 @@ export default class Person extends Component {
                     <img 
                       src={createTeam}
                       style={styles.img}
-                      onClick={_this.onIncreaseAmountOpen.bind(_this)}
+                      onClick={_this.onCreateTeamOpen.bind(_this)}
                     />
+                    <Dialog
+                      visible={_this.state.visibleIncreaseAmount}
+                      footer={footer}
+                      onClose={_this.onIncreaseAmountClose}
+                      style={styles.increaseAmount}
+                    >
+                      <Row>
+                        <Col style={{ fontSize: "16px", margin: "25px 25px 25px 10px" }}>
+                          充值地址：
+                        </Col>
+                      </Row>
+                      <Row>
+                        <Col style={{ fontSize: "14px", margin: "0px 0px 0px 15px", wordBreak: "break-all", wordWrap:"break-word" }}>
+                          {_this.state.copyAddress}&nbsp;&nbsp;&nbsp;&nbsp;
+                          <Balloon 
+                            trigger={<FoundationSymbol type="copy" onClick={_this.copyAddress.bind(_this)}>复制</FoundationSymbol>} 
+                            closable={false}
+                          >
+                            点击复制地址
+                          </Balloon>
+                        </Col>
+                      </Row>
+                      <Row>
+                        <Col style={{ textAlign: "center", marginTop: "40px" }}>
+                          <img src={addressQrcode} width="128" height="128" alt="address" />
+                        </Col>
+                      </Row>
+                    </Dialog>
                   </Col>
                   <Col align={"center"} style={{ textAlign: "center" }}>
                     <img 
                       src={joinTeam}
                       style={styles.img}
-                      onClick={_this.onIncreaseAmountOpen.bind(_this)}
+                      onClick={_this.onJoinTeamOpen.bind(_this)}
                     />
+                    <Dialog
+                      visible={_this.state.visibleCreateTeam}
+                      footer={footer}
+                      onClose={_this.onCreateTeamClose}
+                      style={styles.increaseAmount}
+                    >
+                      <Row>
+                        <Col style={{ fontSize: "16px", margin: "25px 25px 25px 10px" }}>
+                          创建
+                        </Col>
+                      </Row>
+                    </Dialog>
                   </Col>
                   <Col align={"center"} style={{ textAlign: "center" }}>
                     <img
@@ -166,6 +232,18 @@ export default class Person extends Component {
                       style={styles.img}
                       onClick={_this.onIncreaseAmountOpen.bind(_this)}
                     />
+                    <Dialog
+                      visible={_this.state.visibleJoinTeam}
+                      footer={footer}
+                      onClose={_this.onJoinTeamClose}
+                      style={styles.increaseAmount}
+                    >
+                      <Row>
+                        <Col style={{ fontSize: "16px", margin: "25px 25px 25px 10px" }}>
+                          加入
+                        </Col>
+                      </Row>
+                    </Dialog>
                   </Col>
                 </Row> :  <Row wrap>
                   <Col align={"center"} style={{ textAlign: "center" }}>
