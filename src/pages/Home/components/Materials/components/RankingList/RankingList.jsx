@@ -61,8 +61,26 @@ export default class RankingList extends Component {
   }
 
   nameRender(value, index, record) {
-    let column = record.ranking + '.' + record.name
-    return column;
+    let fontColor = "#666666"
+    let fontSize = "14px"
+    if (record.ranking == 1) {
+      fontColor = "#FEE554"
+      fontSize = "20px"
+    } else if (record.ranking == 2) {
+      fontColor = "#BCBCBC"
+      fontSize = "20px"
+    } else if (record.ranking == 3) {
+      fontColor = "#DA9746"
+      fontSize = "20px"
+    }
+    return (
+      <div>
+        <span style={{ color: fontColor, fontSize: fontSize }}>
+          { record.ranking + '. ' }
+        </span>
+        { record.name }
+      </div>
+    )
   }
 
   onTeamInfoOpen(record) {
@@ -95,7 +113,7 @@ export default class RankingList extends Component {
           {tabs.map(function(item) {
             if (item.key == 'ranking') {
               return <TabPane key={item.key} tab={item.tab}>
-                <Table dataSource={dataSource} hasBorder={false} onRowClick={_this.onTeamInfoOpen.bind(_this)}>
+                <Table dataSource={dataSource} hasBorder={false} onRowClick={_this.onTeamInfoOpen.bind(_this)} style={{ cursor: "pointer" }}>
                   <Table.Column title="名称" dataIndex="name" cell={_this.nameRender} />
                   <Table.Column title="分数" dataIndex="score" />
                   <Table.Column title="类型" dataIndex="type" />
@@ -105,7 +123,7 @@ export default class RankingList extends Component {
               </TabPane>
             } else {
               return <TabPane key={item.key} tab={item.tab}>
-                <Table dataSource={myDataSource} hasBorder={false}>
+                <Table dataSource={myDataSource} hasBorder={false} style={{ cursor: "pointer" }}>
                   <Table.Column title="名称" dataIndex="name" cell={_this.nameRender} />
                   <Table.Column title="分数" dataIndex="score" />
                   <Table.Column title="类型" dataIndex="type" />
