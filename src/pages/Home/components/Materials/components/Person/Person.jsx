@@ -9,7 +9,6 @@ const tabs = [
   { tab: "参加", key: "join", content: "这里是参加内容" },
   { tab: "账户", key: "account", content: "这里是账户内容" },
 ];
-const addressQrcode = '/public/images/address_qrcode.png';
 const dataSource = [
   { action: "打入", target: "帮推客战队", coins: "1380", created_at: "2018-08-15 19:00:00" },
   { action: "打入", target: "星球公司", coins: "1280", created_at: "2018-08-15 18:00:00" },
@@ -17,6 +16,10 @@ const dataSource = [
   { action: "打入", target: "自己", coins: "980", created_at: "2018-08-15 16:00:00" },
   { action: "打入", target: "星球公司", coins: "880", created_at: "2018-08-15 15:00:00" },
 ];
+const addressQrcode = "/public/images/address_qrcode.png";
+const createTeam = "/public/images/create_team.png";
+const joinTeam = "/public/images/join_team.png";
+const increaseAmount = "/public/images/increase_amount.png";
 
 export default class Person extends Component {
   static displayName = 'Person';
@@ -118,7 +121,10 @@ export default class Person extends Component {
                       <Row>
                         <Col style={{ fontSize: "14px", margin: "0px 0px 0px 15px", wordBreak: "break-all", wordWrap:"break-word" }}>
                           {_this.state.copyAddress}&nbsp;&nbsp;&nbsp;&nbsp;
-                          <Balloon trigger={<FoundationSymbol type="copy" onClick={_this.copyAddress.bind(_this)}>复制</FoundationSymbol>} closable={false}>
+                          <Balloon 
+                            trigger={<FoundationSymbol type="copy" onClick={_this.copyAddress.bind(_this)}>复制</FoundationSymbol>} 
+                            closable={false}
+                          >
                             点击复制地址
                           </Balloon>
                         </Col>
@@ -141,14 +147,25 @@ export default class Person extends Component {
               {
                 _this.state.isPay ? <Row wrap>
                   <Col align={"center"} style={{ textAlign: "center" }}>
-                    <Button 
-                      size={"large"} 
-                      type={"primary"} 
-                      style={styles.increaseButton} 
+                    <img 
+                      src={createTeam}
+                      style={styles.img}
                       onClick={_this.onIncreaseAmountOpen.bind(_this)}
-                    >
-                      组团
-                    </Button>
+                    />
+                  </Col>
+                  <Col align={"center"} style={{ textAlign: "center" }}>
+                    <img 
+                      src={joinTeam}
+                      style={styles.img}
+                      onClick={_this.onIncreaseAmountOpen.bind(_this)}
+                    />
+                  </Col>
+                  <Col align={"center"} style={{ textAlign: "center" }}>
+                    <img
+                      src={increaseAmount}
+                      style={styles.img}
+                      onClick={_this.onIncreaseAmountOpen.bind(_this)}
+                    />
                   </Col>
                 </Row> :  <Row wrap>
                   <Col align={"center"} style={{ textAlign: "center" }}>
@@ -225,7 +242,7 @@ const styles = {
   },
   smallIncreaseButton: {
     borderRadius: 0,
-    // margin: "26px",
+    marginLeft: "25px",
     fontSize: "16px",
     // padding: "10px 30px",
     // height: 52,
@@ -243,5 +260,10 @@ const styles = {
     height: 500,
     width: 300,
     padding: 10,
+  },
+  img: {
+    height: 80,
+    width: 80,
+    cursor: "pointer",
   },
 }
